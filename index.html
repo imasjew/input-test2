@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta name="viewport"
+		content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<title>Document</title>
+	<link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+	<div class="main-wrap">
+		<div class="tab-wrap">
+			<div class="tab-item current-tab">公共订单池</div>
+			<div class="tab-item">已出票</div>
+			<div class="tab-item">竞价中订单</div>
+		</div>
+		<div class="card-list" id="card-list">
+			<div class="card-wrap">
+				<img class="card-bg" src="./icons/order1.png" alt="">
+				<div class="card-price">
+					订单出价:
+					<span id="price-btn0" class="price-btn-wrap" onclick="handleEditPrice(0)">请选择出价</span>
+					<span id="price-text-wrap0" class="price-text-wrap hide">
+						<span id="price-text0" onclick="handleEditPrice(0)" class=""></span>
+						<img id="del-icon0" class="close-icon" src="./icons/close.png" alt="" onclick="showDelConfirm(0)">
+					</span>
+				</div>
+			</div>
+			<div class="card-wrap">
+				<img class="card-bg" src="./icons/order2.png" alt="">
+				<div class="card-price">
+					订单出价:
+					<span id="price-btn1" class="price-btn-wrap" onclick="handleEditPrice(1)">请选择出价</span>
+					<span id="price-text-wrap1" class="price-text-wrap hide">
+						<span id="price-text1" onclick="handleEditPrice(1)" class=""></span>
+						<img id="del-icon1" class="close-icon" src="./icons/close.png" alt="" onclick="showDelConfirm(1)">
+					</span>
+				</div>
+			</div>
+
+		</div>
+		<div id="footer-wrap" class="footer-wrap">
+			<img class="footer-bg" src="./icons/footer.png" alt="">
+		</div>
+		<div id="input-component" class="modal-wrap hide" onclick="handleClickInputMock()">
+			<div id="input-modal-wrap" class="input-modal-wrap input-modal-padding">
+				<div class="input-title-wrap">
+					<div>建议出价: 30 - 50</div>
+					<div class="confirm-btn" onclick="confirmPrice()">确定</div>
+				</div>
+				<div class="input-body-wrap">
+					<input id="input-price" class="input-body" type="number" onfocus="handleInputFocus()"
+						onblur="handleInputBlur()">
+					<div class="input-float-title">请填写您的出价(￥)</div>
+				</div>
+			</div>
+		</div>
+		<div id="del-component" class="del-modal-wrap hide" onclick="handleClickDelMock()">
+			<div class="del-body">
+				<div class="del-title">提示</div>
+				<div class="del-subtitle">是否确认取消报价？</div>
+				<div class="del-btn-wrap">
+					<div class="del-btn-cancel" onclick="handleCloseDel()">取消</div>
+					<div class="del-btn-confirm" onclick="handleConfirmDel()">确认</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	let currentInputIndex = null
+	let currentDelIndex = null
+	const cardListDom = document.getElementById("card-list").children
+	const inputPriceDom = document.getElementById("input-price")
+	const inputComponentDom = document.getElementById("input-component")
+	const footerDom = document.getElementById("footer-wrap")
+	const delComponentDom = document.getElementById("del-component")
+
+	function handleEditPrice(index) {
+		currentInputIndex = index
+		removeDomClass(inputComponentDom, 'hide')
+	}
+
+	function confirmPrice() {
+		const priceDom = document.getElementById("price-text" + currentInputIndex)
+		const delIconDom = document.getElementById("del-icon" + currentInputIndex)
+		if (inputPriceDom.value) {
+			// 赋值、隐藏modal、按钮和价格展示互换
+			priceDom.innerHTML = '￥ ' + inputPriceDom.value
+			hideInputModal()
+			removeDomClass(document.getElementById("price-text-wrap" + currentInputIndex), 'hide')
+			addDomClass(document.getElementById("price-btn" + currentInputIndex), 'hide')
+		} else {
+			alert('请输入价格')
+		}
+	}
+
+	function handleInputFocus() {
+		addDomClass(footerDom, 'hide')
+		removeDomClass(document.getElementById('input-modal-wrap'), 'input-modal-padding')
+	}
+	function handleInputBlur() {
+		removeDomClass(footerDom, 'hide')
+		// 修复blur比按钮点击先生效导致按钮移动点不到
+		setTimeout(() => {
+			addDomClass(document.getElementById('input-modal-wrap'), 'input-modal-padding')
+		}, 50);
+	}
+	function handleClickInputMock() {
+		const e = window.event || arguments.callee.caller.arguments[0]
+		if (e.target.id !== 'input-component') return
+		hideInputModal()
+	}
+	function hideInputModal() {
+		inputPriceDom.value = null
+		addDomClass(inputComponentDom, 'hide')
+	}
+
+	function showDelConfirm(index) {
+		currentDelIndex = index
+		removeDomClass(delComponentDom, 'hide')
+	}
+	function handleConfirmDel() {
+		const priceDom = document.getElementById("price-text" + currentDelIndex)
+		priceDom.innerHTML = ""
+		addDomClass(delComponentDom, 'hide')
+		addDomClass(document.getElementById("price-text-wrap" + currentDelIndex), 'hide')
+		removeDomClass(document.getElementById("price-btn" + currentDelIndex), 'hide')
+	}
+	function handleCloseDel() {
+		addDomClass(delComponentDom, 'hide')
+	}
+
+	function handleClickDelMock() {
+		const e = window.event || arguments.callee.caller.arguments[0]
+		if (e.target.id !== 'del-component') return
+		hideInputModal()
+	}
+
+	function addDomClass(dom, addClass) {
+		if (dom.className.indexOf(addClass) !== -1) {
+			return;
+		}
+		dom.className += ' ' + addClass
+		console.log('dom.className :>> ', dom.className);
+	}
+	function removeDomClass(dom, delClass) {
+		const oldClass = dom.getAttribute("class")
+		const newClass = oldClass.replace(delClass, "")
+		dom.setAttribute("class", newClass)
+	}
+</script>
+
+</html>
