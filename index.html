@@ -31,6 +31,7 @@
 					</span>
 				</div>
 			</div>
+			<div id="test"></div>
 			<div class="card-wrap">
 				<img class="card-bg" src="./icons/order2.png" alt="">
 				<div class="card-price">
@@ -114,9 +115,8 @@
 		document.addEventListener("keydown", handleEnter)
 	}
 	function handleEnter(e) {
-		alert('enterd', e.witch)
+		document.getgetElementById("test").innerHTML = e.which
 		if (e.which === 13) {
-			alert(e.which)
 
 			// setTimeout(() => {
 			// 	confirmPrice()
