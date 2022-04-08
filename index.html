@@ -51,7 +51,7 @@
 			<div id="input-modal-wrap" class="input-modal-wrap input-modal-padding">
 				<div class="input-title-wrap">
 					<div>建议出价: 30 - 50</div>
-					<div class="confirm-btn" onclick="confirmPrice()">确定</div>
+					<div class="confirm-btn" onclick="handleInputCancel()">取消</div>
 				</div>
 				<div class="input-body-wrap">
 					<input id="input-price" class="input-body" type="number" onfocus="handleInputFocus()"
@@ -80,10 +80,18 @@
 	const inputComponentDom = document.getElementById("input-component")
 	const footerDom = document.getElementById("footer-wrap")
 	const delComponentDom = document.getElementById("del-component")
+	const listenerFunc = handleEnter.bind(this, 1)
+	// https://blog.csdn.net/pinkling/article/details/112890149
 
 	function handleEditPrice(index) {
+		const currentPrice = document.getElementById("price-text" + index).innerHTML
+		if (currentPrice) {
+			console.log('currentPrice :>> ', currentPrice);
+			inputPriceDom.value = currentPrice.replace("￥ ", "")
+		}
 		currentInputIndex = index
 		removeDomClass(inputComponentDom, 'hide')
+		inputPriceDom.select()
 	}
 
 	function confirmPrice() {
@@ -103,9 +111,17 @@
 	function handleInputFocus() {
 		addDomClass(footerDom, 'hide')
 		removeDomClass(document.getElementById('input-modal-wrap'), 'input-modal-padding')
+		document.addEventListener("keydown", handleEnter)
+	}
+	function handleEnter(e) {
+		console.log('e :>> ', e);
+		if (e.which === 13) {
+			confirmPrice()
+		}
 	}
 	function handleInputBlur() {
 		removeDomClass(footerDom, 'hide')
+		document.removeEventListener("keydown", handleEnter)
 		// 修复blur比按钮点击先生效导致按钮移动点不到
 		setTimeout(() => {
 			addDomClass(document.getElementById('input-modal-wrap'), 'input-modal-padding')
@@ -114,6 +130,9 @@
 	function handleClickInputMock() {
 		const e = window.event || arguments.callee.caller.arguments[0]
 		if (e.target.id !== 'input-component') return
+		hideInputModal()
+	}
+	function handleInputCancel() {
 		hideInputModal()
 	}
 	function hideInputModal() {
