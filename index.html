@@ -31,7 +31,7 @@
 					</span>
 				</div>
 			</div>
-			<div id="test">sssss</div>
+			<!-- <div id="test">sssss</div> -->
 			<div class="card-wrap">
 				<img class="card-bg" src="./icons/order2.png" alt="">
 				<div class="card-price">
@@ -114,13 +114,13 @@
 		document.addEventListener("keydown", handleEnter)
 	}
 	function handleEnter(e) {
-		document.removeEventListener("keydown", handleEnter)
 		if (e.which === 13) {
-			setTimeout(() => {
-				confirmPrice()
-			}, 50);
-
+			confirmPrice()
+			// setTimeout(() => {
+			// 	confirmPrice()
+			// }, 50);
 		}
+		document.removeEventListener("keydown", handleEnter)
 	}
 	function handleInputBlur() {
 		confirmPrice()
