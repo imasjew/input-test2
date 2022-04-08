@@ -98,8 +98,11 @@
 		const priceDom = document.getElementById("price-text" + currentInputIndex)
 		const delIconDom = document.getElementById("del-icon" + currentInputIndex)
 		if (inputPriceDom.value) {
-			// 赋值、隐藏modal、按钮和价格展示互换
-			priceDom.innerHTML = '￥ ' + inputPriceDom.value
+			if (inputPriceDom.value > 50 || inputPriceDom.value < 30) {
+				return alert('请输入建议范围内的价格')
+			}
+				// 赋值、隐藏modal、按钮和价格展示互换
+				priceDom.innerHTML = '￥ ' + inputPriceDom.value
 			hideInputModal()
 			removeDomClass(document.getElementById("price-text-wrap" + currentInputIndex), 'hide')
 			addDomClass(document.getElementById("price-btn" + currentInputIndex), 'hide')
@@ -125,7 +128,7 @@
 		}
 	}
 	function handleInputBlur() {
-		
+
 		// removeDomClass(footerDom, 'hide')
 		// document.removeEventListener("keydown", handleEnter)
 	}
