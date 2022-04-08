@@ -117,6 +117,8 @@
 		if (e.which === 13) {
 			setTimeout(() => {
 				confirmPrice()
+				removeDomClass(footerDom, 'hide')
+				document.removeEventListener("keydown", handleEnter)
 			}, 50);
 
 		}
