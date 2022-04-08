@@ -116,7 +116,7 @@
 	function handleEnter(e) {
 		if (e.which === 13) {
 			if (inputPriceDom.value > 50 || inputPriceDom.value < 30) {
-				return alert('请输入建议范围内的价格')
+				return
 			}
 			setTimeout(() => {
 				confirmPrice()
