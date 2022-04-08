@@ -114,13 +114,14 @@
 		document.addEventListener("keydown", handleEnter)
 	}
 	function handleEnter(e) {
-		alert(e.witch)
-		// if (e.which === 13) {
-		// 	setTimeout(() => {
-		// 		confirmPrice()
-		// 	}, 50);
+		if (e.which === 13) {
+			alert(e.witch)
 
-		// }
+			// setTimeout(() => {
+			// 	confirmPrice()
+			// }, 50);
+
+		}
 	}
 	function handleInputBlur() {
 		confirmPrice()
