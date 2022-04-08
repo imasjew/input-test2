@@ -150,6 +150,12 @@ body,
 	box-sizing: border-box;
 }
 
+.err-info {
+	margin-top: 8px;
+	color: red;
+	font-size: 12px;
+	text-align: center;
+}
 .input-float-title {
 	position: absolute;
 	left: 0;

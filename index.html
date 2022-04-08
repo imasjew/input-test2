@@ -56,6 +56,7 @@
 				<div class="input-body-wrap">
 					<input id="input-price" class="input-body" type="number" onfocus="handleInputFocus()"
 						onblur="handleInputBlur()">
+						<div id="err-info" class="err-info hide">请填写建议范围内的价格</div>
 					<div class="input-float-title">请填写您的出价(￥)</div>
 				</div>
 			</div>
@@ -80,6 +81,7 @@
 	const inputComponentDom = document.getElementById("input-component")
 	const footerDom = document.getElementById("footer-wrap")
 	const delComponentDom = document.getElementById("del-component")
+	const errInfoDom = document.getElementById("err-info")
 	const listenerFunc = handleEnter.bind(this, 1)
 	// https://blog.csdn.net/pinkling/article/details/112890149
 
@@ -116,13 +118,14 @@
 	function handleEnter(e) {
 		if (e.which === 13) {
 			if (inputPriceDom.value > 50 || inputPriceDom.value < 30) {
-				
+				removeDomClass(errInfoDom, 'hide')
 				return
 			}
 			setTimeout(() => {
 				confirmPrice()
 				removeDomClass(footerDom, 'hide')
 				inputPriceDom.blur()
+				addDomClass(errInfoDom, 'hide')
 				document.removeEventListener("keydown", handleEnter)
 			}, 50);
 
