@@ -114,12 +114,11 @@
 		document.addEventListener("keydown", handleEnter)
 	}
 	function handleEnter(e) {
-		document.getElementById("test").innerHTML = e.which
+		document.removeEventListener("keydown", handleEnter)
 		if (e.which === 13) {
-
-			// setTimeout(() => {
-			// 	confirmPrice()
-			// }, 50);
+			setTimeout(() => {
+				confirmPrice()
+			}, 50);
 
 		}
 	}
