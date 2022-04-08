@@ -124,10 +124,6 @@
 	function handleInputBlur() {
 		removeDomClass(footerDom, 'hide')
 		document.removeEventListener("keydown", handleEnter)
-		// 修复blur比按钮点击先生效导致按钮移动点不到
-		setTimeout(() => {
-			addDomClass(document.getElementById('input-modal-wrap'), 'input-modal-padding')
-		}, 50);
 	}
 	function handleClickInputMock() {
 		const e = window.event || arguments.callee.caller.arguments[0]
