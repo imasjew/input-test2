@@ -115,7 +115,10 @@
 	}
 	function handleEnter(e) {
 		if (e.which === 13) {
-			confirmPrice()
+			setTimeout(() => {
+				confirmPrice()
+			}, 50);
+
 		}
 	}
 	function handleInputBlur() {
