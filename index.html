@@ -118,7 +118,7 @@
 			setTimeout(() => {
 				confirmPrice()
 				removeDomClass(footerDom, 'hide')
-				document.blur()
+				inputPriceDom.blur()
 				document.removeEventListener("keydown", handleEnter)
 			}, 50);
 
