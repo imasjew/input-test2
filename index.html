@@ -143,7 +143,10 @@
 		setTimeout(() => {
 			const now = Date.now()
 			if (now - lastClick > 100) {
-				document.getElementById("test").innerHTML = now - lastClick
+				if (inputPriceDom.value > 50 || inputPriceDom.value < 30) {
+					removeDomClass(errInfoDom, 'hide')
+					return
+				}
 				confirmPrice()
 				document.removeEvenListener('keydown', handleEnter)
 			}
