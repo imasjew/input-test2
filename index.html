@@ -138,10 +138,9 @@
 	}
 	function handleInputBlur() {
 		// https://stackoverflow.com/questions/4971061/capture-done-button-click-in-iphones-virtual-keyboard-with-javascript
-		document.getElementById("test").innerHTML = Date.now() - lastClick
 		setTimeout(() => {
 			if (Date.now() - lastClick > 50) {
-
+				document.getElementById("test").innerHTML = Date.now() - lastClick
 				handleConfirmPrice()
 			}
 		}, 20);
