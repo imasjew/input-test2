@@ -126,6 +126,7 @@
 				removeDomClass(errInfoDom, 'hide')
 				return
 			}
+			lastClick = Date.now()
 			setTimeout(() => {
 				confirmPrice()
 				removeDomClass(footerDom, 'hide')
