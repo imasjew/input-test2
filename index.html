@@ -56,7 +56,7 @@
 				<div class="input-body-wrap">
 					<input id="input-price" class="input-body" type="number" onfocus="handleInputFocus()"
 						onblur="handleInputBlur()">
-						<div id="err-info" class="err-info hide">请填写建议范围内的价格</div>
+					<div id="err-info" class="err-info hide">请填写建议范围内的价格</div>
 					<div class="input-float-title">请填写您的出价(￥)</div>
 				</div>
 			</div>
@@ -84,16 +84,20 @@
 	const errInfoDom = document.getElementById("err-info")
 	const listenerFunc = handleEnter.bind(this, 1)
 	// https://blog.csdn.net/pinkling/article/details/112890149
-
+	let lastClick
 	function handleEditPrice(index) {
 		const currentPrice = document.getElementById("price-text" + index).innerHTML
 		if (currentPrice) {
-			console.log('currentPrice :>> ', currentPrice);
 			inputPriceDom.value = currentPrice.replace("￥ ", "")
 		}
 		currentInputIndex = index
 		removeDomClass(inputComponentDom, 'hide')
 		inputPriceDom.select()
+		document.addEventListener("click", handleClick)
+	}
+	function handleClick() {
+		lastClick = Date.now()
+		console.log('lastClick :>> ', lastClick);
 	}
 
 	function confirmPrice() {
@@ -132,6 +136,12 @@
 		}
 	}
 	function handleInputBlur() {
+		// https://stackoverflow.com/questions/4971061/capture-done-button-click-in-iphones-virtual-keyboard-with-javascript
+		setTimeout(() => {
+			if (Date.now() - lastClick > 50) {
+				handleConfirmPrice()
+			}
+		}, 20);
 
 		// removeDomClass(footerDom, 'hide')
 		// document.removeEventListener("keydown", handleEnter)
