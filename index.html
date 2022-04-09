@@ -132,7 +132,7 @@
 				removeDomClass(footerDom, 'hide')
 				inputPriceDom.blur()
 				addDomClass(errInfoDom, 'hide')
-				document.removeEventListener("keydown", handleEnter)
+				// document.removeEventListener("keydown", handleEnter)
 			}, 50);
 
 		}
@@ -144,11 +144,12 @@
 			if (now - lastClick > 50) {
 				document.getElementById("test").innerHTML = now - lastClick
 				confirmPrice()
+				document.removeEvenListener('keydown', handleEnter)
 			}
 		}, 20);
 
 		// removeDomClass(footerDom, 'hide')
-		// document.removeEventListener("keydown", handleEnter)
+		document.removeEventListener("keydown", handleEnter)
 	}
 	function handleClickInputMock() {
 		const e = window.event || arguments.callee.caller.arguments[0]
