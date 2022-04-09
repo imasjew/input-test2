@@ -111,7 +111,6 @@
 			hideInputModal()
 			removeDomClass(document.getElementById("price-text-wrap" + currentInputIndex), 'hide')
 			addDomClass(document.getElementById("price-btn" + currentInputIndex), 'hide')
-
 		} else {
 			alert('请输入价格')
 		}
@@ -143,7 +142,7 @@
 		// https://stackoverflow.com/questions/4971061/capture-done-button-click-in-iphones-virtual-keyboard-with-javascript
 		setTimeout(() => {
 			const now = Date.now()
-			if (now - lastClick > 50) {
+			if (now - lastClick > 100) {
 				document.getElementById("test").innerHTML = now - lastClick
 				confirmPrice()
 				document.removeEvenListener('keydown', handleEnter)
