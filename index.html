@@ -102,6 +102,7 @@
 	}
 
 	function confirmPrice() {
+		document.removeEventListener("click", handleClick)
 		const priceDom = document.getElementById("price-text" + currentInputIndex)
 		const delIconDom = document.getElementById("del-icon" + currentInputIndex)
 		if (inputPriceDom.value) {
@@ -110,6 +111,7 @@
 			hideInputModal()
 			removeDomClass(document.getElementById("price-text-wrap" + currentInputIndex), 'hide')
 			addDomClass(document.getElementById("price-btn" + currentInputIndex), 'hide')
+
 		} else {
 			alert('请输入价格')
 		}
@@ -132,7 +134,7 @@
 				removeDomClass(footerDom, 'hide')
 				inputPriceDom.blur()
 				addDomClass(errInfoDom, 'hide')
-				// document.removeEventListener("keydown", handleEnter)
+				document.removeEventListener("keydown", handleEnter)
 			}, 50);
 
 		}
@@ -149,7 +151,7 @@
 		}, 20);
 
 		// removeDomClass(footerDom, 'hide')
-		document.removeEventListener("keydown", handleEnter)
+		// document.removeEventListener("keydown", handleEnter)
 	}
 	function handleClickInputMock() {
 		const e = window.event || arguments.callee.caller.arguments[0]
