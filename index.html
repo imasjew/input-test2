@@ -109,6 +109,7 @@
 			// 赋值、隐藏modal、按钮和价格展示互换
 			priceDom.innerHTML = '￥ ' + inputPriceDom.value
 			hideInputModal()
+			addDomClass(errInfoDom, 'hide')
 			removeDomClass(document.getElementById("price-text-wrap" + currentInputIndex), 'hide')
 			addDomClass(document.getElementById("price-btn" + currentInputIndex), 'hide')
 		} else {
@@ -132,7 +133,6 @@
 				confirmPrice()
 				inputPriceDom.blur()
 				removeDomClass(footerDom, 'hide')
-				addDomClass(errInfoDom, 'hide')
 				document.removeEventListener("keydown", handleEnter)
 			}, 50);
 
@@ -150,7 +150,6 @@
 				confirmPrice()
 				document.removeEvenListener('keydown', handleEnter)
 				removeDomClass(footerDom, 'hide')
-				addDomClass(errInfoDom, 'hide')
 			}
 		}, 20);
 
