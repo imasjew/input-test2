@@ -130,8 +130,8 @@
 			lastClick = Date.now()
 			setTimeout(() => {
 				confirmPrice()
-				removeDomClass(footerDom, 'hide')
 				inputPriceDom.blur()
+				removeDomClass(footerDom, 'hide')
 				addDomClass(errInfoDom, 'hide')
 				document.removeEventListener("keydown", handleEnter)
 			}, 50);
@@ -149,6 +149,8 @@
 				}
 				confirmPrice()
 				document.removeEvenListener('keydown', handleEnter)
+				removeDomClass(footerDom, 'hide')
+				addDomClass(errInfoDom, 'hide')
 			}
 		}, 20);
 
